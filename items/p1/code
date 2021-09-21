@@ -1,0 +1,5 @@
+addi input x x
+addi input x x
+addi input x x
+addi input x x
+copy x output
