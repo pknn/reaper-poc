@@ -1,7 +1,7 @@
 import { Literal, Readable, State, Writable } from "../types"
 import { readFrom, readFromX, writeTo } from '../services/reducer'
 
-type MathOpsKeys = 'addi' | 'subi' | 'muli' | 'divi' | 'modi'
+export type MathOpsKeys = 'addi' | 'subi' | 'muli' | 'divi' | 'modi'
 type MathOpsFn = (a: number, b: number) => number
 
 const mathOpsFnMap: Record<MathOpsKeys, MathOpsFn> = {
@@ -17,7 +17,7 @@ const getMathsOpsArgs = ([p, q, r]: any[]): [keyof Readable, keyof Writable, key
 
 export const isMathCommand = (command: string) => Object.keys(mathOpsFnMap).includes(command)
 
-export const execute = (state: State, command: string, args: any[]) => {
+export const execute = (state: State, command: MathOpsKeys, args: any[]) => {
   const [from, to, withs] = getMathsOpsArgs(args)
   writeTo(state, to, mathOpsFnMap[command](readFrom(state, from), readFromX(state, withs)))
 }

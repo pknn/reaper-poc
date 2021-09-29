@@ -4,14 +4,15 @@ import { zip } from "../helpers/misc"
 import { State } from "../types"
 import * as MathOperation from '../operations/MathOperation'
 import * as WriteOperation from '../operations/WriteOperation'
+import { MathOpsKeys } from "../operations/MathOperation"
 
 export const runLine = (state: State, line: string) => {
   const splitted = line.split(' ')
-  const command = splitted.shift()
+  const command = splitted.shift() as string
   const args = splitted
 
   if (MathOperation.isMathCommand(command)) {
-    MathOperation.execute(state, command, args)
+    MathOperation.execute(state, command as MathOpsKeys, args)
   } else {
     switch(command) {
       case 'copy':

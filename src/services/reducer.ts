@@ -1,7 +1,7 @@
 import { Literal, Readable, State, Writable } from "../types"
 
 export const readFrom = (state: State, fromKey: keyof Readable) => 
-  fromKey === 'input' ? state.input.shift() : state[fromKey]
+  (fromKey === 'input' ? state.input.shift() : state[fromKey]) as number
 
 export const readFromX = (state: State, fromKey: keyof Readable | Literal) =>
   typeof(fromKey) === 'number' ? fromKey : readFrom(state, fromKey)
